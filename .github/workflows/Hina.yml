@@ -6,7 +6,7 @@ on:
     
 jobs:
   test:
-    runs-on: buildjet-8vcpu-ubuntu-2004
+    runs-on: macOS-10.15 
     name: Dude
     steps:
        - name: Checkout
@@ -38,8 +38,7 @@ jobs:
          continue-on-error: true
          run: |
            cd Dark
-           docker build -t compressor . && docker run compressor
-           
+           sudo apt-get update && sudo apt -qq install -y git wget pv jq wget python3-dev ffmpeg mediainfo && pip3 install -r requirements.txt && python3 -m SmartEncoder
        - name: Loop workflow
          continue-on-error: true
          run: |
