@@ -6,15 +6,9 @@ on:
     
 jobs:
   build:
-   runs-on: ubuntu-latest
-   strategy: 
-      matrix:
-        os: [ubuntu-latest]
-        python: [3.9]
-      
-    
+    runs-on: ubuntu-20.04
 
-   steps:
+    steps:
        - name: Checkout
          uses: actions/checkout@main
        
@@ -52,3 +46,4 @@ jobs:
            git add looper.txt
            git commit -m "Workflow : Loop at $(date -u +%D-%T%P)"
            git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
+
