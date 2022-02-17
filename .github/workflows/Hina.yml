@@ -6,9 +6,15 @@ on:
     
 jobs:
   build:
-    runs-on: ubuntu-20.04
+   runs-on: ubuntu-latest
+   strategy: 
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: [3.6, 3.9]
+      
+    
 
-    steps:
+   steps:
        - name: Checkout
          uses: actions/checkout@main
        
