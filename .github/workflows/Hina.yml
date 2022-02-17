@@ -6,17 +6,9 @@ on:
     
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-21.04
 
     steps:
-       - name: Lol
-         uses: actions/setup-node@v2
-         with:
-          node-version: '16'
-          cache: 'npm'
-       -  run: npm install
-       
-       
        - name: Checkout
          uses: actions/checkout@main
        
