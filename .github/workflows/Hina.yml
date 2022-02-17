@@ -5,9 +5,9 @@ on:
     workflow_dispatch:
     
 jobs:
-  test:
-    runs-on: macOS-10.15 
-    name: Dude
+  build:
+    runs-on: ubuntu-20.04
+
     steps:
        - name: Checkout
          uses: actions/checkout@main
@@ -17,9 +17,6 @@ jobs:
          with:
             all_but_latest: true
             access_token: ${{ github.token }}
-       - uses: actions/setup-node@v2
-         with:
-            node-version: '16'
        - name: initialization
          continue-on-error: true
          run: |
@@ -38,7 +35,8 @@ jobs:
          continue-on-error: true
          run: |
            cd Dark
-           sudo apt-get update && sudo apt -qq install -y git wget pv jq wget python3-dev ffmpeg mediainfo && pip3 install -r requirements.txt && python3 -m SmartEncoder
+           docker build -t compressor . && docker run compressor
+           
        - name: Loop workflow
          continue-on-error: true
          run: |
@@ -48,4 +46,3 @@ jobs:
            git add looper.txt
            git commit -m "Workflow : Loop at $(date -u +%D-%T%P)"
            git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
-
